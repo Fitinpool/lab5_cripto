@@ -1,0 +1,20 @@
+version: "2.1"
+services:
+  openssh-server:
+    image: lscr.io/linuxserver/openssh-server:latest
+    container_name: openssh-server
+    hostname: openssh-server #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - USER_PASSWORD=${USER_PASSWORD}
+      - USER_NAME=${USER_NAME}
+      - PUBLIC_KEY=${PUBLIC_KEY}
+    volumes:
+      - ./config:/config
+    ports:
+      - 2222:2222
+    restart: unless-stopped
+
+# ssh user@localhost -p 2222
